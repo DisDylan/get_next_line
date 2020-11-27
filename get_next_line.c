@@ -6,7 +6,7 @@
 /*   By: dpoinsu <dpoinsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:50:15 by dpoinsu           #+#    #+#             */
-/*   Updated: 2020/11/27 14:04:28 by dpoinsu          ###   ########.fr       */
+/*   Updated: 2020/11/27 14:10:08 by dpoinsu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ int get_next_line(int fd, char **line)
 	int i;
 
 	i = 0;
-	if (!fd || !*line)
+	if (!fd || !line)
 		return (-1);
 	if (!save)
 	{
-		while (read(fd, save, BUFF_SIZE))
+		while (read(fd, save, BUFF_SIZE) >= 1)
 			i++;
 	}
+	i = 0;
 	while (save[i] != '\n')
 	{
 		tmp[i] = save[i];
