@@ -6,7 +6,7 @@
 /*   By: dpoinsu <dpoinsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:50:15 by dpoinsu           #+#    #+#             */
-/*   Updated: 2020/12/01 11:00:26 by dpoinsu          ###   ########.fr       */
+/*   Updated: 2020/12/01 11:34:34 by dpoinsu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	if (!(nstr = (char*)malloc(sizeof(nstr) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (NULL);
-	ft_strncpy(newstr, s1, ft_strlen(s1));
-	ft_strncpy(newstr + ft_strlen(s1), s2, ft_strlen(s2));
+	ft_strncpy(nstr, s1, ft_strlen(s1));
+	ft_strncpy(nstr + ft_strlen(s1), s2, ft_strlen(s2));
 	nstr[ft_strlen(s1) + ft_strlen(s2)] = '\0';
 	return (nstr);
 }
@@ -45,8 +45,7 @@ static char	*ft_strdup(char *s, size_t len)
 {
 	char		*nstr;
 
-	res = (char*)malloc(sizeof(nstr) * (len + 1));
-	if (!res)
+	if (!(nstr = (char*)malloc(sizeof(nstr) * (len + 1))))
 		return (NULL);
 	ft_strncpy(nstr, s, len);
 	nstr[len] = '\0';

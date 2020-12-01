@@ -6,7 +6,7 @@
 /*   By: dpoinsu <dpoinsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:51:12 by dpoinsu           #+#    #+#             */
-/*   Updated: 2020/12/01 11:11:24 by dpoinsu          ###   ########.fr       */
+/*   Updated: 2020/12/01 11:33:18 by dpoinsu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,5 @@
 int			get_next_line(int fd, char **line);
 size_t		ft_strlen(const char *s);
 char		*ft_strchr(const char *s, int c);
-char		*ft_strncpy(char *dest, char *src, size_t nb);
-char		*ft_strjoin(char *s1, char *s2);
-char		*ft_strndup(char *s, size_t len);
 
 #endif
