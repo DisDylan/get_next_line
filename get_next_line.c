@@ -6,7 +6,7 @@
 /*   By: dpoinsu <dpoinsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:50:15 by dpoinsu           #+#    #+#             */
-/*   Updated: 2020/12/01 10:38:15 by dpoinsu          ###   ########.fr       */
+/*   Updated: 2020/12/01 11:00:26 by dpoinsu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,57 +20,58 @@ static char	*ft_strdup(char *str)
 	if (!(strn = (char*)malloc(sizeof(strn) * ft_strlen(str) + 1)))
 		return (NULL);
 	i = -1;
-	while (s[++i])
+	while (str[++i])
 		strn[i] = str[i];
 	strn[i + 1] = '\0';
 	return (strn);
 }
 
-static int	process_line(char **backup, char **line, char *nl_str)
+static int	make_line(char **save, char **line, char *str)
 {
-	char*tmp;
+	char *tmp;
 
-	if (nl_str != NULL)
+	if (str != NULL)
 	{
-		*line = ft_strndup(*backup, nl_str - *backup);
-		tmp = ft_strndup(nl_str + 1, ft_strlen(nl_str + 1));
-		free(*backup);
-		*backup = tmp;
+		
+		*line = ft_strdup(*save);
+		tmp = ft_strdup(str + 1);
+		free(*save);
+		*save = tmp;
 		return (1);
 	}
-	if (*backup != NULL)
+	if (*save != NULL)
 	{
-		*line = *backup;
-		*backup = NULL;
+		*line = *save;
+		*save = NULL;
 	}
 	else
-		*line = ft_strndup("", 1);
+		*line = ft_strdup("");
 	return (0);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*backup[256];
+	static char	*save[256];
 	char		buffer[BUFFER_SIZE + 1];
 	char		*tmp;
-	int			len_read;
-	char		*nl_str;
+	int			buff_len;
+	char		*str;
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	while ((nl_str = ft_strchr(backup[fd], '\n')) == 0
-			&& (len_read = read(fd, buffer, BUFFER_SIZE)) > 0)
+	while ((str = ft_strchr(save[fd], '\n')) == 0
+			&& (buff_len = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		buffer[len_read] = 0;
-		if (backup[fd] == NULL)
-			tmp = ft_strndup(buffer, len_read);
+		buffer[buff_len] = '\0';
+		if (!save[fd])
+			tmp = ft_strdup(buffer);
 		else
-			tmp = ft_strjoin(backup[fd], buffer);
-		if (backup[fd] != 0)
-			free(backup[fd]);
-		backup[fd] = tmp;
+			tmp = ft_strjoin(save[fd], buffer);
+		if (save[fd] != 0)
+			free(save[fd]);
+		save[fd] = tmp;
 	}
-	if (len_read < 0)
+	if (buff_len < 0)
 		return (-1);
-	return (process_line(&backup[fd], line, nl_str));
+	return (make_line(&save[fd], line, str));
 }

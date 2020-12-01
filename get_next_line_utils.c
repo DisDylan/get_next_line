@@ -6,7 +6,7 @@
 /*   By: dpoinsu <dpoinsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 14:12:33 by dpoinsu           #+#    #+#             */
-/*   Updated: 2020/12/01 09:55:23 by dpoinsu          ###   ########.fr       */
+/*   Updated: 2020/12/01 11:01:20 by dpoinsu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-void	*ft_strcpy(char *dest, char *src)
+void	ft_strcpy(char *dest, char *src)
 {
 	size_t i;
 
@@ -49,7 +49,7 @@ void	*ft_strcpy(char *dest, char *src)
 		dest[i] = src[i];
 }
 
-void	*ft_strcat(char *dest, char *src)
+void	ft_strcat(char *dest, char *src)
 {
 	size_t i;
 	size_t j;
