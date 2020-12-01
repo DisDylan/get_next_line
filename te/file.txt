@@ -1,4 +1,0 @@
-Hello world\n
-Where are you today ?\n
-I'm very fine i thank you a lot !\n
-OK

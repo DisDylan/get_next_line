@@ -6,13 +6,13 @@
 /*   By: dpoinsu <dpoinsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:50:15 by dpoinsu           #+#    #+#             */
-/*   Updated: 2020/12/01 14:42:01 by dpoinsu          ###   ########.fr       */
+/*   Updated: 2020/12/01 14:45:38 by dpoinsu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char		*ft_strncpy(char *dst, char *src, size_t n)
+static char			*ft_strncpy(char *dst, char *src, size_t n)
 {
 	size_t		i;
 
@@ -27,9 +27,9 @@ static char		*ft_strncpy(char *dst, char *src, size_t n)
 	return (dst);
 }
 
-static char		*ft_strjoin(char *s1, char *s2)
+static char			*ft_strjoin(char *s1, char *s2)
 {
-	char			*nstr;
+	char *nstr;
 
 	if (!s1 && !s2)
 		return (NULL);
@@ -42,9 +42,9 @@ static char		*ft_strjoin(char *s1, char *s2)
 	return (nstr);
 }
 
-static char		*ft_strdup(char *s, size_t len)
+static char			*ft_strdup(char *s, size_t len)
 {
-	char		*nstr;
+	char *nstr;
 
 	if (!(nstr = (char*)malloc(sizeof(nstr) * (len + 1))))
 		return (NULL);
@@ -77,11 +77,11 @@ static int			make_new_line(char **save, char **line, char *str)
 
 int					get_next_line(int fd, char **line)
 {
-	static char		*save[256];
-	char			buffer[BUFFER_SIZE + 1];
-	char			*tmp;
-	char			*str;
-	int					len;
+	static char	*save[256];
+	char		buffer[BUFFER_SIZE + 1];
+	char		*tmp;
+	char		*str;
+	int			len;
 
 	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
 		return (-1);
