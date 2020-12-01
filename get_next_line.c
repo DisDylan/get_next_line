@@ -6,7 +6,7 @@
 /*   By: dpoinsu <dpoinsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:50:15 by dpoinsu           #+#    #+#             */
-/*   Updated: 2020/12/01 09:59:35 by dpoinsu          ###   ########.fr       */
+/*   Updated: 2020/12/01 10:38:15 by dpoinsu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 static char	*ft_strdup(char *str)
 {
+	char	*strn;
+	size_t	i;
 
+	if (!(strn = (char*)malloc(sizeof(strn) * ft_strlen(str) + 1)))
+		return (NULL);
+	i = -1;
+	while (s[++i])
+		strn[i] = str[i];
+	strn[i + 1] = '\0';
+	return (strn);
 }
 
 static int	process_line(char **backup, char **line, char *nl_str)
@@ -41,13 +50,13 @@ static int	process_line(char **backup, char **line, char *nl_str)
 
 int		get_next_line(int fd, char **line)
 {
-	static char*backup[256];
-	static charbuffer[BUFFER_SIZE + 1];
-	char*tmp;
-	intlen_read;
-	char*nl_str;
+	static char	*backup[256];
+	char		buffer[BUFFER_SIZE + 1];
+	char		*tmp;
+	int			len_read;
+	char		*nl_str;
 
-	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
+	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
 	while ((nl_str = ft_strchr(backup[fd], '\n')) == 0
 			&& (len_read = read(fd, buffer, BUFFER_SIZE)) > 0)
