@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get.c                                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpoinsu <dpoinsu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 19:50:15 by dpoinsu           #+#    #+#             */
-/*   Updated: 2020/12/01 11:34:34 by dpoinsu          ###   ########.fr       */
+/*   Updated: 2020/12/01 14:42:01 by dpoinsu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_strncpy(char *dst, char *src, size_t n)
+static char		*ft_strncpy(char *dst, char *src, size_t n)
 {
 	size_t		i;
 
@@ -27,13 +27,14 @@ static char	*ft_strncpy(char *dst, char *src, size_t n)
 	return (dst);
 }
 
-static char	*ft_strjoin(char *s1, char *s2)
+static char		*ft_strjoin(char *s1, char *s2)
 {
 	char			*nstr;
-	
+
 	if (!s1 && !s2)
 		return (NULL);
-	if (!(nstr = (char*)malloc(sizeof(nstr) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+	if (!(nstr = (char*)malloc(sizeof(nstr) *
+					(ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (NULL);
 	ft_strncpy(nstr, s1, ft_strlen(s1));
 	ft_strncpy(nstr + ft_strlen(s1), s2, ft_strlen(s2));
@@ -41,7 +42,7 @@ static char	*ft_strjoin(char *s1, char *s2)
 	return (nstr);
 }
 
-static char	*ft_strdup(char *s, size_t len)
+static char		*ft_strdup(char *s, size_t len)
 {
 	char		*nstr;
 
@@ -51,7 +52,8 @@ static char	*ft_strdup(char *s, size_t len)
 	nstr[len] = '\0';
 	return (nstr);
 }
-static int		process_line(char **save, char **line, char *str)
+
+static int			make_new_line(char **save, char **line, char *str)
 {
 	char			*tmp;
 
@@ -73,13 +75,13 @@ static int		process_line(char **save, char **line, char *str)
 	return (0);
 }
 
-int				get_next_line(int fd, char **line)
+int					get_next_line(int fd, char **line)
 {
 	static char		*save[256];
-	static char		buffer[BUFFER_SIZE + 1];
+	char			buffer[BUFFER_SIZE + 1];
 	char			*tmp;
-	int				len;
 	char			*str;
+	int					len;
 
 	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
 		return (-1);
@@ -97,5 +99,5 @@ int				get_next_line(int fd, char **line)
 	}
 	if (len < 0)
 		return (-1);
-	return (process_line(&save[fd], line, str));
+	return (make_new_line(&save[fd], line, str));
 }
